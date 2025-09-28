@@ -18,3 +18,23 @@ func (rental Rental) determineAmount() float64 {
   return amount
 }
 ```
+
+```go
+type RentalTypeFactory interface {
+  make(typeName string) RentalType
+}
+
+type RentalTypeFactoryImpl struct{}
+
+func (r RentalTypeFactoryImpl) make(typeName string) RentalType {
+  switch typeName {
+  case "childrens":
+    return ChildrensRental{}
+  case "new release":
+    return NewReleaseRental{}
+  case "regular":
+    return RegularRental{}
+  }
+  return nil
+}
+```
